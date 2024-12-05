@@ -1,4 +1,4 @@
-# pi-kiosk
+# Pi-Kiosk
 
 PI Kiosk is yet another kiosk application for the Raspberry Pi. The main features are:
 - A simple installation script for installing on a Raspberry Pi
