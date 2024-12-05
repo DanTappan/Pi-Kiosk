@@ -1,0 +1,65 @@
+#! /usr/bin/env bash
+#
+# Start a kiosk mode browser
+#
+exec > /tmp/browser.out 2>&1
+URL=$1
+export DISPLAY=":0"
+if [ -f .kiosk_browser ]; then
+    BROWSER=`cat .kiosk_browser`
+else
+    BROWSER=chromium
+fi
+CR_USER=`whoami`
+echo kiosk_browser $BROWSER running as $CR_USER
+
+case $BROWSER in
+    midori)
+	BROWSER_FILE="/usr/bin/midori"
+	;;
+    chromium)
+	BROWSER_FILE="/usr/lib/chromium-browser/chromium-browser"
+	if [ ! -f $BROWSER_FILE ]; then
+	    BROWSER_FILE="/usr/lib/chromium/chromium"
+	fi
+	;;
+    *)
+	echo "unknown browser $BROWSER"
+	sleep 300
+	exit 1
+	;;
+esac
+
+
+echo KIOSK_USER=$CR_USER
+CR_HOME="/home/$CR_USER"
+
+if [ ! -f  "$BROWSER_FILE" ] ; then
+    echo "No browser"
+    sleep 300
+
+else
+    case $BROWSER in
+	chromium)
+	    
+	    # clean up
+	    killall -g -r chromium
+
+	    # Start Chromium in kiosk mode
+	    if [ -d "$CR_HOME/.config/chromium" ] ; then
+		sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $CR_HOME/.config/chromium/'Local State'
+		sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' 	$CR_HOME/.config/chromium/Default/Preferences
+	    fi
+	    BROWSER_ARGS="--disable-infobars --noerrdialogs --incognito--check-for-update-interval=31536000 --simulate-critical-update --kiosk"
+
+	    ;;
+	midori)
+	    killall -g -r midori
+	    BROWSER_ARGS="-e Fullscreen"
+	    ;;
+    esac
+
+    $BROWSER $BROWSER_ARGS $URL
+
+fi
+
