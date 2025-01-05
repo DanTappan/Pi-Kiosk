@@ -76,6 +76,11 @@ sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
 # loop running the kiosk script
 #
 while true; do
+  #
+  # Workaround: chromium browser has a tendency to fill the disk with temporary files
+  #
+  rm -rf ~/.config/chromium
+
   ./kiosk.py
 done
 EOF
