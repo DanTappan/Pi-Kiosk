@@ -33,7 +33,17 @@ case $BROWSER in
 esac
 
 # Python requirements
-sudo apt-get install python3 python3-bcrypt python3-multipart -y
+sudo apt-get install python3 python3-bcrypt -y
+#
+# *******
+# there is currently (AFAICT) no apt package for the 'multipart' python library (https://pypi.org/project/multipart/)
+# although, confusingly, there is a 'python3-multipart' which is a totally different package
+# to work around this, install multipart using pip, bypassing the complaints about virtual environments etc.
+# I suppose I should package the 'kiosk' program as a pyinstaller built executable to avoid this issue
+# ********
+#
+sudo apt install python3-pip -y
+pip install multipart --break-system-packages
 
 #
 # Start off in home directory
