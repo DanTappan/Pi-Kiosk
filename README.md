@@ -44,6 +44,7 @@ Toward the end, the script will prompt for a password to protect the kiosk contr
 ### Installation directly on a Pi
 
 ```
+sudo apt install git -y
 git clone https://github.com/DanTappan/Pi-Kiosk
 cd Pi-Kiosk
 ./install.sh [ --browser *browser* ]
