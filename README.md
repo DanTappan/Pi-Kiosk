@@ -66,12 +66,12 @@ Once the installation is complete it will have created:
 
 The default webpage to display is a placeholder. To configure the kiosk, connect to the kiosk Pi using a web browser. This will display the following webpage
 
-![Screenshot of the Pi Kiosk control webpage](https://dantappan.net/wp-content/uploads/2024/12/KioskPage.png)
+![Screenshot of the Pi Kiosk control webpage](Snapshots/Kiosk.png)
 
 
 - The **Password** field is required on all commands, enter the password which was set during the install
 - To select a new URL to display, enter it into the **Kiosk URL** field and hit the **[Set URL]** button
-- The program also supports an optional dropdown menu to select pre-configured URLs. See the instructions in [index.html](https://github.com/DanTappan/Pi-Kiosk/blob/main/index.html) for how to modify or remove the dropdown menu
+- The program also supports an optional dropdown menu to select pre-configured URLs. Select an entry from the dropdown menu and hit the **[Select URL]** button. See the instructions in [index.html](https://github.com/DanTappan/Pi-Kiosk/blob/main/index.html) for how to modify or remove the dropdown menu
 - The **[Restart Kiosk Browser]** button will reload the currently selected URL
 - The **[Reboot Kiosk]** button will reboot the kiosk
 - The **[Shutdown Kiosk]** button will shut down the kiosk
