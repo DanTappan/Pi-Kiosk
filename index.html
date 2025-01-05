@@ -2,41 +2,65 @@
 <html>
 
   <head>
-    <meta name="viewport"
-	  content="width=device-width, initial-scale=1.0">
-    <title>Configure Kiosk</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>Configure Kiosk</title>
 
-  <style type="text/css">
-    .formfield { 
-      margin-bottom: 2pt;
-    }
-  </style>
-  </head>
+	  <style type="text/css">
+		  .formfield {
+      		margin-bottom: 2pt;
+    		}
+	  </style>
+	  <script>
+      	window.onload = function() {
+        	history.replaceState("", "", "");
+      	}
+	  </script>
 
-  <body width="100%" bgcolor="lightgray">
-    <center>
-      <h3>Kiosk Control</h3>
-      <form action="" method="post">
-	<div class="formfield">
-	  <table>
-	    <tr>
-	      <td><label>Password:</label></td>
-	      <td><input type="password" id="Password" name="Password"></td>
-	    </tr>
-	    <tr>
-	      <td><label>Kiosk URL:</label></td>
-	      <td><input type="text" id="Url" name="Url"
-			 !URL!
-			 ></td>
-	      <td><input type="submit" name="Set" value="Set URL"></td>
-	    </tr>
-	  </table>
-	  </br>
-          <input type="submit" name="Restart" value="Restart Kiosk Browser">
-	  <input type="submit" name="Reboot" value="Reboot Kiosk">
-	  <input type="submit" name="Shutdown" value="Shutdown Kiosk">
-	</div> 
-      </form>
-    </center>
-  <body>
+
+  	</head>
+
+  	<body width="100%" bgcolor="lightgray">
+    	<center>
+      	<h3>Kiosk Control</h3>
+			<!-- !MSG! - substitute 'msg' parameter here -->
+      	<form action="" method="post">
+		<div class="formfield">
+	  	<table>
+	    	<tr>
+	      		<td><label>Password:</label></td>
+	      		<td><input type="password" id="Password" name="Password"></td>
+	    	</tr>
+	    	<tr>
+	      		<td><label>Kiosk URL:</label></td>
+	      		<td><input type="text" id="Url" name="Url"
+			 	<!-- !URL! - substitute URL here-->
+			 	></td>
+	      		<td><input type="submit" name="Set" value="Set URL"></td>
+	    	</tr>
+			<!-- Comment out this section to remove the dropdown menu -->
+	    	<tr>
+	      		<td><label>Select:</label></td>
+	      		<td>
+				<select name="Dropdown">
+					<!-- edit these to change the contents of the select dropdown -->
+		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/ball2.gif">Ball</option>
+		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/colorspiral1080.gif">ColorSpiral</option>
+		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/colorwheels1080.gif">ColorWheels</option>
+		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/flowers1080.gif">Flowers</option>
+		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/tower.gif">SpinTower</option>
+				</select>
+	      		</td>
+	      		<td><input type="submit" name="Select" value="Select URL"></td>
+	    	</tr>
+			<!-- end of dropdown menu section >
+	  	</table>
+	  	</br>
+			<input type="submit" name="Restart" value="Restart Kiosk Browser">
+	  		<input type="submit" name="Reboot" value="Reboot Kiosk">
+	  		<input type="submit" name="Shutdown" value="Shutdown Kiosk">
+		</div>
+
+		</form>
+		</center>
+		</body>
 </html>

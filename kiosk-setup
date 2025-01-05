@@ -32,7 +32,8 @@ case $BROWSER in
 	;;
 esac
 
-sudo apt-get install python3 python3-bcrypt -y
+# Python requirements
+sudo apt-get install python3 python3-bcrypt python3-multipart -y
 
 #
 # Start off in home directory

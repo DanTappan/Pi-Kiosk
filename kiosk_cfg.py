@@ -1,7 +1,10 @@
 #
 # kiosk configuration variables
 #
-pwdfilename="./KIOS_PASSWD"
-urlfilename="./KIOSK_URL.json"
+from os import path
+
+html_index = path.abspath(path.join(path.dirname(__file__), 'index.html'))
+pwdfilename=path.abspath(path.join(path.dirname(__file__), './KIOS_PASSWD'))
+urlfilename=path.abspath(path.join(path.dirname(__file__), './KIOSK_URL.json'))
 
 
