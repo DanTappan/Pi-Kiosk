@@ -83,6 +83,8 @@ while [ "$1" != "" ]; do
 done
 
 if [ "$PI" = "" ]; then
+    echo 
+    echo '*****'
     confirm "Installing on local machine."
 
     rm -rf ~/kiosk
