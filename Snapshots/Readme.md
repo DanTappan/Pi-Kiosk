@@ -1,0 +1,1 @@
+Snapshot images for documentation
