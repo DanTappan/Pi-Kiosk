@@ -131,6 +131,7 @@ EOF
     cat > sudo_$WHOAMI << EOF
 $WHOAMI ALL=(ALL) NOPASSWD:ALL
 EOF
+    sudo chown root sudo_$WHOAMI
     sudo mv sudo_$WHOAMI /etc/sudoers.d
 else
     echo "Remember to use raspi-config to set automatic CLI login"
