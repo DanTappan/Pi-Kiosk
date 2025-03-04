@@ -42,6 +42,7 @@ case $BROWSER in
 	    BROWSER_PACKAGE="chromium"
 	else
 	    BROWSER_PACKAGE="chromium-browser"
+	fi
 	;;
 esac
 sudo apt-get install --no-install-recommends $BROWSER_PACKAGE -y
