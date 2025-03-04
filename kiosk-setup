@@ -114,7 +114,7 @@ EOF
 chmod +x keyF5
 
 if [ ! -z "$ARMBIAN" ]; then
-    echo "Setting up Armbian auto login
+    echo "Setting up Armbian auto login"
     # there is currently no equivalent under Armbian to setting up login through raspi-config, and 
     # the process is poorly documented
     sudo mkdir -p /etc/systemd/system/getty@tty1.service.d/
