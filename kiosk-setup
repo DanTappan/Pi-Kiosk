@@ -7,6 +7,16 @@
 
 BROWSER=$1
 
+#
+# Test whether we are running on raspian or armbian
+ARMBIAN=`which armbian-config`
+
+if [ ! -z "$ARMBIAN" ] ; then
+    echo "Installing for Armbian"
+else
+    echo "Installing for Raspberry Pi"
+fi
+
 case $BROWSER in
     midori)
         ;;
@@ -25,12 +35,16 @@ sudo apt-get install iptables -y
 
 case $BROWSER in
      midori)
-         sudo apt-get install --no-install-recommends midori -y
+	BROWSER_PACKAGE="midori"
 	 ;;
      chromium)
-	 sudo apt-get install --no-install-recommends chromium-browser -y
+	if [ ! -z "$ARMBIAN" ]; then
+	    BROWSER_PACKAGE="chromium"
+	else
+	    BROWSER_PACKAGE="chromium-browser"
 	;;
 esac
+sudo apt-get install --no-install-recommends $BROWSER_PACKAGE -y
 
 # Python requirements
 sudo apt-get install python3 python3-bcrypt -y
@@ -98,6 +112,28 @@ exit
 EOF
 chmod +x keyF5
 
-echo "Remember to use raspi-config to set automatic CLI login"
+if [ ! -z "$ARMBIAN" ]; then
+    echo "Setting up Armbian auto login
+    # there is currently no equivalent under Armbian to setting up login through raspi-config, and 
+    # the process is poorly documented
+    sudo mkdir -p /etc/systemd/system/getty@tty1.service.d/
+    WHOAMI=`whoami`
+    cat > autologin.conf << EOF
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $WHOAMI %I $TERM
+EOF
+    sudo mv autologin.conf mkdir /etc/systemd/system/getty@tty1.service.d/
+    #
+    # also, make sure user can run sudo w/o a password
+    #
+    cat > sudo_$WHOAMI << EOF
+$WHOAMI ALL=(ALL) NOPASSWD:ALL
+EOF
+    sudo mv sudo_$WHOAMI /etc/sudoers.d
+else
+    echo "Remember to use raspi-config to set automatic CLI login"
+fi
+
 
 
