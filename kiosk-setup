@@ -124,7 +124,7 @@ if [ ! -z "$ARMBIAN" ]; then
 ExecStart=
 ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $WHOAMI %I $TERM
 EOF
-    sudo mv autologin.conf mkdir /etc/systemd/system/getty@tty1.service.d/
+    sudo mv autologin.conf /etc/systemd/system/getty@tty1.service.d/
     #
     # also, make sure user can run sudo w/o a password
     #
