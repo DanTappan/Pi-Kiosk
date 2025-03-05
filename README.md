@@ -12,7 +12,7 @@ Applications include:
 
 ## Supported devices
 
-This package works on any Raspberry Pi model. It will probably work on any similar single-board-computer running a variant of DFebian, but the installations scripts may need to be tweaked.
+This package works on any Raspberry Pi model. It has also been installed on an [Orange Pi Zero 3](http://www.orangepi.org/), running the [Armbian Bookworm image](https://www.armbian.com/orange-pi-zero-3/).  It will probably work on any similar single-board-computer running a variant of Debian, but the installations scripts may need to be tweaked.
 
 Lower end models, like a Pi Zero W with only 512MB of memory, will not be able to display dynamic web pages, for example a moving GIF image, but can handle static images. For a Pi Zero it is recommended to use the Legacy Bullseye image, or older, to save memory. To save additional memory, use Midori instead of Chromium. Chromium is not supported on the 32 bit Bookworm image.
 
@@ -28,8 +28,7 @@ There are two ways to install
 use git clone, or download the files as a zip file to a local directory 
 Run the script install.sh and specify the name of a newly installed Raspberry Pi
 ```
-git clone https://github.com/DanTappan/Pi-Kiosk
-cd Pi-Kiosk
+git clone https://github.com/DanTappan/Pi-Kioskcd Pi-Kiosk
 ./install.sh --pi *KioskPi* [ --browser *browser* ]
 ```
 
@@ -44,10 +43,8 @@ Toward the end, the script will prompt for a password to protect the kiosk contr
 ### Installation directly on a Pi
 
 ```
-sudo apt install git -y
-git clone https://github.com/DanTappan/Pi-Kiosk
-cd Pi-Kiosk
-./install.sh [ --browser *browser* ]
+sudo apt install git -y && git clone https://github.com/DanTappan/Pi-Kiosk
+cd Pi-Kiosk; ./install.sh [ --browser *browser* ]
 ```
 
 Again, the script will prompt for a password for the kiosk control web page.
@@ -63,6 +60,7 @@ With either installation method:
 Once the installation is complete it will have created:
 - a subdirectory, *kiosk*, of the home directory of the pi user, containing the necessary files
 - an openbox configuration that will autostart the kiosk when the Pi reboots
+- on Armbian images it also configures **sudo** to work without a password, and enables autologin for the current user on the console terminal
 
 The default webpage to display is a placeholder. To configure the kiosk, connect to the kiosk Pi using a web browser. This will display the following webpage
 
