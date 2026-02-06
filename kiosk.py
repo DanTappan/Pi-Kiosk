@@ -164,12 +164,12 @@ def webpage(msg=None):
                         of.write(bytes('value="', "utf-8"))
                         of.write(bytes(url, "utf-8"))
                         of.write(bytes('"\n', "utf-8"))
-                elif re.search("!DPI!", line) is not None:
-                        of.write(bytes('value="', "utf-8"))
-                        of.write(bytes(scale, "utf-8"))
-                        of.write(bytes('"\n', "utf-8"))
                 else:
-                    of.write(bytes(line, "utf-8"))
+                    line = re.sub(
+                        rf'(<option\s+value="{re.escape(scale)}")(\s*>)',
+                        r'\1 selected\2',
+                    line)
+                    of.write(line.encode("utf-8"))
             return of.getvalue()
 
     except FileNotFoundError:
