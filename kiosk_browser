@@ -11,6 +11,8 @@ if [ "$2" != "" -a "$2" != "1.0" ]; then
    SCALE="--force-device-scale-factor=$2"
 fi
 
+export DISPLAY=":0"
+
 if [ -f .kiosk_browser ]; then
     BROWSER=`cat .kiosk_browser`
 else
