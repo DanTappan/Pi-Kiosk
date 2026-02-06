@@ -142,7 +142,7 @@ def browser_scale(scale=None) :
         with scalefile.open(mode="w") as f:
             f.write(str(scalefinal))
 
-    return scalefinal
+    return str(scalefinal)
 
 
 def webpage(msg=None):
@@ -187,6 +187,7 @@ def url_form(form):
         kill_browser()
     elif form.get("Scale"):
         scale = form.get("ScaleDropdown")
+        print(scale)
         browser_scale(scale)
         body = webpage()
         kill_browser()
