@@ -4,8 +4,13 @@
 #
 exec > /tmp/browser.out 2>&1
 URL=$1
-SCALE=$2
-export DISPLAY=":0"
+
+# Handle scale factor, don't set if null or 1.0
+SCALE=""
+if [ "$2" != "" -a "$2" != "1.0" ]; then
+   SCALE="--force-device-scale-factor=$2"
+fi
+
 if [ -f .kiosk_browser ]; then
     BROWSER=`cat .kiosk_browser`
 else
@@ -51,7 +56,7 @@ else
 		sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $CR_HOME/.config/chromium/'Local State'
 		sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' 	$CR_HOME/.config/chromium/Default/Preferences
 	    fi
-	    BROWSER_ARGS="--disable-infobars --noerrdialogs --incognito--check-for-update-interval=31536000 --simulate-critical-update --force-device-scale-factor=$SCALE --kiosk"
+	    BROWSER_ARGS="--disable-infobars --noerrdialogs --incognito--check-for-update-interval=31536000 --simulate-critical-update $SCALE --kiosk"
 
 	    ;;
 	midori)
