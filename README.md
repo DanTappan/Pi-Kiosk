@@ -28,8 +28,8 @@ There are two ways to install
 use git clone, or download the files as a zip file to a local directory 
 Run the script install.sh and specify the name of a newly installed Raspberry Pi
 ```
-git clone https://github.com/DanTappan/Pi-Kioskcd Pi-Kiosk
-./install.sh --pi *KioskPi* [ --browser *browser* ]
+git clone https://github.com/DanTappan/Pi-Kiosk;
+cd Pi-Kiosk ./install.sh --pi *KioskPi* [ --browser *browser ]
 ```
 
 This will install the package on *KioskPi*, selecting the selected browser. The *--browser* argument is optional, options are:
@@ -43,10 +43,12 @@ Toward the end, the script will prompt for a password to protect the kiosk contr
 ### Installation directly on a Pi
 
 ```
-sudo apt install git -y && git clone https://github.com/DanTappan/Pi-Kiosk
-cd Pi-Kiosk; ./install.sh [ --browser *browser* ]
+sudo apt install git -y && git clone https://github.com/DanTappan/Pi-Kiosk; cd Pi-Kiosk; ./install.sh
 ```
-
+or
+```
+sudo apt install git -y && git clone https://github.com/DanTappan/Pi-Kiosk; cd Pi-Kiosk; ./install.sh  --browser midori
+```
 Again, the script will prompt for a password for the kiosk control web page.
 
 ### Post installation
