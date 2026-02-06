@@ -15,7 +15,7 @@ import re
 import threading
 from pathlib import Path
 import bcrypt
-from kiosk_cfg import html_index, pwdfilename, urlfilename
+from kiosk_cfg import html_index, pwdfilename, urlfilename, scalefilename
 
 Debug=False
 
@@ -118,12 +118,39 @@ def server_url(url=None) :
 
     return urldict["url"]
 
+def browser_scale(scale=None) :
+    """ Get or set the Scale for the displayed webpage """
+    scalefile = Path(scalefilename)
+    scalefinal = 1.0
+
+    dump = True
+    if scale is not None :
+        scalefinal = float(scale)
+    else:
+        try:
+            with scalefile.open() as f:
+                try:
+                    content = f.readline()
+                    scalefinal = float(content)
+                    dump = False
+                except ValueError:
+                    pass
+        except FileNotFoundError:
+            pass
+                 
+    if dump:
+        with scalefile.open(mode="w") as f:
+            f.write(str(scalefinal))
+
+    return str(scalefinal)
+
 
 def webpage(msg=None):
     """ return the HTML body of a webpage. "
         msg" is an optional text to insert
     """
     url = server_url()
+    scale = browser_scale()
 
     try:
         with open(html_index) as f,  io.BytesIO(b'') as of:
@@ -133,13 +160,16 @@ def webpage(msg=None):
                         of.write(bytes('<p>', "utf-8"))
                         of.write(bytes(msg, "utf-8"))
                         of.write(bytes('<br><p>', "utf-8"))
-                else:
-                    if re.search("!URL!", line) is not None:
+                elif re.search("!URL!", line) is not None:
                         of.write(bytes('value="', "utf-8"))
                         of.write(bytes(url, "utf-8"))
                         of.write(bytes('"\n', "utf-8"))
-                    else:
-                        of.write(bytes(line, "utf-8"))
+                else:
+                    line = re.sub(
+                        rf'(<option\s+value="{re.escape(scale)}")(\s*>)',
+                        r'\1 selected\2',
+                    line)
+                    of.write(line.encode("utf-8"))
             return of.getvalue()
 
     except FileNotFoundError:
@@ -153,6 +183,12 @@ def url_form(form):
     elif form.get("Select"):
         url = form.get("Dropdown")
         server_url(url)
+        body = webpage()
+        kill_browser()
+    elif form.get("Scale"):
+        scale = form.get("ScaleDropdown")
+        print(scale)
+        browser_scale(scale)
         body = webpage()
         kill_browser()
     elif form.get("Set"):
@@ -199,10 +235,12 @@ def my_web_app(environ, start_response):
 def run_browser():
     """ start a subprocess running the selected browser """
     url = server_url()
+    scale = browser_scale()
 
     args = [
         "./kiosk_browser",
-        url
+        url,
+        scale
     ]
     try:
         popen = subprocess.Popen(args, start_new_session=True)
