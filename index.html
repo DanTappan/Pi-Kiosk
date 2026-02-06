@@ -33,7 +33,7 @@
 	    	<tr>
 	      		<td><label>Kiosk URL:</label></td>
 	      		<td><input type="text" id="Url" name="Url"
-			 	<!-- !URL! - substitute URL here-->
+			 	<!-- !URL! - substitute URL here -->
 			 	></td>
 	      		<td><input type="submit" name="Set" value="Set URL"></td>
 	    	</tr>
@@ -41,7 +41,7 @@
 	    	<tr>
 	      		<td><label>Select:</label></td>
 	      		<td>
-				<select name="Dropdown">
+				<select name="ScaleDropdown">
 					<!-- edit these to change the contents of the select dropdown -->
 		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/ball2.gif">Ball</option>
 		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/colorspiral1080.gif">ColorSpiral</option>
@@ -50,9 +50,25 @@
 		  			<option value="https://dantappan.net/wp-content/uploads/2024/12/tower.gif">SpinTower</option>
 				</select>
 	      		</td>
-	      		<td><input type="submit" name="Select" value="Select URL"></td>
+	      		<td><input type="submit" name="Scale" value="Select URL"></td>
 	    	</tr>
 			<!-- end of dropdown menu section -->
+			 <tr>
+	      		<td><label>Scale:</label></td>
+	      		<td>
+				<select name="Dropdown">
+		  			<option value="0.5">50%</option>
+		  			<option value="0.75">75%</option>
+		  			<option value="1.0">100%</option>
+		  			<option value="1.25">125%</option>
+		  			<option value="1.5">150%</option>
+		  			<option value="1.75">175</option>
+		  			<option value="2.0">200%</option>
+				</select>
+				<!-- !DPI! - substitute 'DPI' parameter here -->
+	      		</td>
+	      		<td><input type="submit" name="Select" value="Set Scale"></td>
+	    	</tr>
 	  	</table>
 	  	</br>
 			<input type="submit" name="Restart" value="Restart Kiosk Browser">
